@@ -12,7 +12,7 @@ public class MovieTicketServer {
         // TBD
     }
 
-    public void bookTicket(MovieTicketClient client) {
+    public synchronized void bookTicket(MovieTicketClient client) {
         int numberOfSeats = client.numberOfTickets;
         String customerName = client.getCustomerName();
         movieName = this.movieName;
@@ -23,6 +23,7 @@ public class MovieTicketServer {
             System.out.println("Hi," + customerName + " : Seats not available for " + movieName);
         } else{
             System.out.println("Hi," + customerName + " : " + numberOfSeats + " Seats booked successfully for " + movieName);
+            availableSeats -= numberOfSeats;
         }
     }
 
